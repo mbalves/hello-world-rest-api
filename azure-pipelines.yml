@@ -28,7 +28,7 @@ stages:
     displayName: Maven Package and Publish Artifacts
     pool:
       vmImage: $(vmImageName)
-
+      demands: Limit -equals DisAbleParallel
     steps:
     - task: Maven@3
       displayName: 'Maven Package'
@@ -55,6 +55,7 @@ stages:
     environment: $(environmentName)
     pool:
       vmImage: $(vmImageName)
+      demands: Limit -equals DisAbleParallel
     strategy:
       runOnce:
         deploy:
