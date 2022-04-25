@@ -4,7 +4,10 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
-- master
+  batch: true
+  branches:
+    include:
+    - master
 
 variables:
 
@@ -28,7 +31,6 @@ stages:
     displayName: Maven Package and Publish Artifacts
     pool:
       vmImage: $(vmImageName)
-      demands: Limit -equals DisAbleParallel
     steps:
     - task: Maven@3
       displayName: 'Maven Package'
@@ -55,7 +57,7 @@ stages:
     environment: $(environmentName)
     pool:
       vmImage: $(vmImageName)
-      demands: Limit -equals DisAbleParallel
+
     strategy:
       runOnce:
         deploy:
